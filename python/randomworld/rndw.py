@@ -17,10 +17,10 @@ roles = [
     "Persuading",
     "Communication and Protocol",
     "Detection",
-    "Driving, riding and piloting",
+    "Driving, Riding and Piloting",
     "Gadgeteering"
     "The medical arts"
-    "Wilderness mastery"
+    "Wilderness Mastery"
     "Scholarship"
     "Intrusion"
     "Combat"
@@ -32,7 +32,7 @@ roles = [
 specialties = {
     "running for your life" : ["Athletics", "Scholarship" ],
     "jumping despite risk" : ["Athletics", "Gadgeteering"],
-    "climbing a dangerous route" : ["Athletics", "Wilderness mastery"],
+    "climbing a dangerous route" : ["Athletics", "Wilderness Mastery"],
     "overpowering with strength" : ["Athletics", "Combat"],
     "lying to their face" : [ "Persuading", "Detection"],
     "seducing someone vulnerable": [ "Persuading", "Communication and Protocol"],
@@ -43,13 +43,13 @@ specialties = {
     "relying on language alone" : ["Communication and Protocol", "Persuading"],
     "deciphering a secret"  : ["Communication and Protocol", "Intrusion"],
     "avoiding a breach of ettiquette" : ["Communication and Protocol", "Scholarship"],
-    "recalling a cultural quirk" : ["Communication and Protocol", "Driving, riding and piloting"],
+    "recalling a cultural quirk" : ["Communication and Protocol", "Driving, Riding and Piloting"],
     "noticing a clue" : ["Detection", "Gadgeteering"],
     "recognizing a threat" : ["Detection", "Magic and Weird"],
     "understanding a detail" : ["Detection", "Scholarship"]  ,                     
     "chasing": ["Driving, Riding and Piloting", "Detection"],
-    "eluding": ["Driving, Riding and Piloting", "Wilderness mastery"],
-    "handling tricky enviroments" : ["Driving, Riding and Piloting", "Atheletics"],
+    "eluding": ["Driving, Riding and Piloting", "Wilderness Mastery"],
+    "handling tricky enviroments" : ["Driving, Riding and Piloting", "Athletics"],
     "needing to react quickly" : ["Driving, Riding and Piloting", "Combat"],
     "exploiting technology": ["Gadgeteering", "Magic and Weird"],
     "disabling a threat": ["Gadgeteering", "Intrusion"],
@@ -76,6 +76,30 @@ specialties = {
     "changing a target": ["Magic and Weird", "Persuading"]
 #"" : [],
 }
+
+def specilties_checker(d):
+    # type in " specilties_checker(specialties) " at the command to check the specialites dictionary of lists above doesn't have broken links in
+    # Iterate through and find out how many times each key occurs
+    vals = {}                       # A dictonary to store how often each value occurs.
+    for i in d.values():
+      for j in set(i):              # Convert to a set to remove duplicates
+        vals[j] = 1 + vals.get(j,0) # If we've seen this value iterate the count
+                                    # Otherwise we get the default of 0 and iterate it
+    print(vals)
+
+    # Iterate through each possible freqency and find how many values have that count.
+    counts = {}                     # A dictonary to store the final frequencies.
+    # We will iterate from 0 (which is a valid count) to the maximum count
+    for i in range(0,max(vals.values())+1):
+        # Find all values that have the current frequency, count them
+        #and add them to the frequency dictionary
+        counts[i] = len([x for x in vals.values() if x == i])
+
+    for key in sorted(counts.keys()):
+      if counts[key] > 0:
+         print (key,":",counts[key] )
+
+
 
 premise = random.choice(keywords)
 
